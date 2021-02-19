@@ -38,6 +38,7 @@ class Pokemon {
   List<double> multipliers;
   List<String> weaknesses;
   List<NextEvolution> nextEvolution;
+  List<PrevEvolution> prevEvolution;
 
   Pokemon(
       {this.id,
@@ -79,6 +80,12 @@ class Pokemon {
         nextEvolution.add(new NextEvolution.fromJson(v));
       });
     }
+    if (json['prev_evolution'] != null) {
+      prevEvolution = new List<PrevEvolution>();
+      json['prev_evolution'].forEach((v) {
+        prevEvolution.add(new PrevEvolution.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -102,6 +109,10 @@ class Pokemon {
       data['next_evolution'] =
           this.nextEvolution.map((v) => v.toJson()).toList();
     }
+    if (this.prevEvolution != null) {
+      data['prev_evolution'] =
+          this.prevEvolution.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -113,6 +124,25 @@ class NextEvolution {
   NextEvolution({this.num, this.name});
 
   NextEvolution.fromJson(Map<String, dynamic> json) {
+    num = json['num'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['num'] = this.num;
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class PrevEvolution {
+  String num;
+  String name;
+
+  PrevEvolution({this.num, this.name});
+
+  PrevEvolution.fromJson(Map<String, dynamic> json) {
     num = json['num'];
     name = json['name'];
   }

@@ -45,16 +45,29 @@ class _HomePageState extends State<HomePage> {
         title: Text('Pokedex App'),
         backgroundColor: Colors.tealAccent[700],
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: Center(child: Text('This is Pokedex')),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.info),
+        backgroundColor: Colors.tealAccent[700],
       ),
       body: pokeList == null
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : GridView.count(
-              crossAxisCount: 2,
+          : ListView(
               children: pokeList.pokemon
                   .map((poke) => Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(3.0),
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
@@ -65,36 +78,44 @@ class _HomePageState extends State<HomePage> {
                                         )));
                           },
                           child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                side: BorderSide(
+                                  color: Colors.green,
+                                  width: 3,
+                                ),
+                              ),
                               elevation: 5.0,
+                              shadowColor: Colors.teal,
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(poke.img))),
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        height: 100,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(poke.img))),
+                                      ),
+                                      Text(
+                                        poke.name,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    poke.name,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  )
                                 ],
                               )),
                         ),
                       ))
                   .toList(),
             ),
-      drawer: Drawer(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.refresh),
-        backgroundColor: Colors.tealAccent[700],
-      ),
     );
   }
 }

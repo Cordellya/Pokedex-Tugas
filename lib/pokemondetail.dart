@@ -7,48 +7,89 @@ class PokeDetail extends StatelessWidget {
   PokeDetail({this.pokemon});
 
   bodyWidget(BuildContext context) => Stack(
-        children: <Widget>[
+        children: [
           Positioned(
             height: MediaQuery.of(context).size.height / 1.5,
-            width: MediaQuery.of(context).size.width - 20,
-            left: 10.0,
-            top: MediaQuery.of(context).size.height * 0.1,
+            width: MediaQuery.of(context).size.width + 10,
+            left: -5,
+            top: 220,
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                  topRight: Radius.circular(60),
+                ),
+                side: BorderSide(
+                  color: Colors.teal,
+                ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
+                children: [
                   SizedBox(
-                    height: 75.0,
+                    height: 5.0,
                   ),
                   Text(
                     pokemon.name,
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "Height: ${pokemon.height}",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Weight: ${pokemon.weight}",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Height: ${pokemon.height}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            height: 1.5,
+                          )),
+                      Text(
+                        "Weight: ${pokemon.weight}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          height: 1.5,
+                        ),
+                      ),
+                      Text(
+                        "egg: ${pokemon.egg}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          height: 1.5,
+                        ),
+                      ),
+                      Text(
+                        "Candy: ${pokemon.candy}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          height: 1.5,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
                   ),
                   Text(
                     "Types",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 18,
+                      height: 2,
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pokemon.type
                         .map((typeText) => FilterChip(
-                            backgroundColor: Colors.amber,
-                            label: Text(typeText),
+                            backgroundColor: Colors.purple[400],
+                            label: Text(
+                              typeText,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
                             onSelected: (b) {}))
                         .toList(),
                   ),
@@ -56,7 +97,8 @@ class PokeDetail extends StatelessWidget {
                     "Weakness",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 18,
+                      height: 1,
                     ),
                   ),
                   Row(
@@ -67,34 +109,86 @@ class PokeDetail extends StatelessWidget {
                             label: Text(
                               w,
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                             onSelected: (b) {}))
                         .toList(),
                   ),
-                  Text(
-                    "Next Evolution",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: pokemon.nextEvolution == null
-                        ? <Widget>[Text("This is the final form")]
-                        : pokemon.nextEvolution
-                            .map((n) => FilterChip(
-                                  backgroundColor: Colors.green,
-                                  label: Text(
-                                    n.name,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
-                                  onSelected: (b) {},
-                                ))
-                            .toList(),
-                  )
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            "Prev Evolution",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              height: 2,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: pokemon.prevEvolution == null
+                                ? [
+                                    Text(
+                                      "This is the first form",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ]
+                                : pokemon.prevEvolution
+                                    .map((p) => FilterChip(
+                                          backgroundColor: Colors.cyan,
+                                          label: Text(
+                                            p.name,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          onSelected: (b) {},
+                                        ))
+                                    .toList(),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            "Next Evolution",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              height: 2,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: pokemon.nextEvolution == null
+                                ? [Text("This is the final form")]
+                                : pokemon.nextEvolution
+                                    .map((n) => FilterChip(
+                                          backgroundColor: Colors.green[600],
+                                          label: Text(
+                                            n.name,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
+                                          ),
+                                          onSelected: (b) {},
+                                        ))
+                                    .toList(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -103,13 +197,23 @@ class PokeDetail extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: Hero(
                 tag: pokemon.img,
-                child: Container(
-                  height: 200.0,
-                  width: 200.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(pokemon.img),
+                child: Card(
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(200),
+                      side: BorderSide(
+                        color: Colors.transparent,
+                      )),
+                  color: Colors.white,
+                  shadowColor: Colors.teal,
+                  child: Container(
+                    height: 250.0,
+                    width: 250.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(pokemon.img),
+                      ),
                     ),
                   ),
                 )),
@@ -121,11 +225,16 @@ class PokeDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var pokemon2 = pokemon;
     return Scaffold(
-      backgroundColor: Colors.cyan,
+      backgroundColor: Colors.tealAccent[400],
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.cyan,
-        title: Text(pokemon2.name),
+        backgroundColor: Colors.tealAccent[400],
+        title: Text(
+          pokemon2.name,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: bodyWidget(context),
     );
