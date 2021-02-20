@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/pokemon.dart';
+import './pokemon.dart';
 
 class PokeDetail extends StatelessWidget {
   final Pokemon pokemon;
@@ -29,43 +29,86 @@ class PokeDetail extends StatelessWidget {
                   SizedBox(
                     height: 5.0,
                   ),
-                  Text(
-                    pokemon.name,
-                    style:
-                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text("Height: ${pokemon.height}",
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(
+                      bottom: 20,
+                      top: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          pokemon.name,
+                          style: TextStyle(
+                              fontSize: 25.0, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "egg: ${pokemon.egg}",
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 15,
                             height: 1.5,
-                          )),
-                      Text(
-                        "Weight: ${pokemon.weight}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          height: 1.5,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "egg: ${pokemon.egg}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          height: 1.5,
+                        Text(
+                          "Candy: ${pokemon.candy}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            height: 1.5,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Candy: ${pokemon.candy}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          height: 1.5,
-                          fontSize: 15,
-                        ),
+                        Divider(
+                          thickness: 0.7,
+                          height: 17,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Text("${pokemon.height}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    height: 1.5,
+                                  )),
+                              Text("Height",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15,
+                                    height: 1.5,
+                                  )),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                " ${pokemon.weight}",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  height: 1.5,
+                                ),
+                              ),
+                              Text(
+                                "Weight",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  height: 1.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
