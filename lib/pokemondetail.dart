@@ -12,7 +12,7 @@ class PokeDetail extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 1.5,
             width: MediaQuery.of(context).size.width + 10,
             left: -5,
-            top: 220,
+            top: MediaQuery.of(context).size.height * 0.27,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -81,7 +81,9 @@ class PokeDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pokemon.type
                         .map((typeText) => FilterChip(
-                            backgroundColor: Colors.purple[400],
+                            shape: StadiumBorder(
+                                side: BorderSide(color: Colors.teal)),
+                            backgroundColor: Colors.blue,
                             label: Text(
                               typeText,
                               style: TextStyle(
@@ -105,6 +107,8 @@ class PokeDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pokemon.weaknesses
                         .map((w) => FilterChip(
+                            shape: StadiumBorder(
+                                side: BorderSide(color: Colors.teal)),
                             backgroundColor: Colors.red[600],
                             label: Text(
                               w,
@@ -142,6 +146,9 @@ class PokeDetail extends StatelessWidget {
                                   ]
                                 : pokemon.prevEvolution
                                     .map((p) => FilterChip(
+                                          shape: StadiumBorder(
+                                              side: BorderSide(
+                                                  color: Colors.teal)),
                                           backgroundColor: Colors.cyan,
                                           label: Text(
                                             p.name,
@@ -173,6 +180,9 @@ class PokeDetail extends StatelessWidget {
                                 ? [Text("This is the final form")]
                                 : pokemon.nextEvolution
                                     .map((n) => FilterChip(
+                                          shape: StadiumBorder(
+                                              side: BorderSide(
+                                                  color: Colors.teal)),
                                           backgroundColor: Colors.green[600],
                                           label: Text(
                                             n.name,
@@ -229,11 +239,22 @@ class PokeDetail extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.tealAccent[400],
-        title: Text(
-          pokemon2.name,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              pokemon2.name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              "#${pokemon2.id}",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
       body: bodyWidget(context),
