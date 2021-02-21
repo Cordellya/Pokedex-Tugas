@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './pokemon.dart';
+import 'models/pokemon.dart';
 
 class PokeDetail extends StatelessWidget {
   final Pokemon pokemon;
@@ -124,8 +124,23 @@ class PokeDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pokemon.type
                         .map((typeText) => FilterChip(
-                            shape: StadiumBorder(
+                            elevation: 5,
+                            shadowColor: Colors.blue,
+                            shape: BeveledRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(8),
+                                ),
                                 side: BorderSide(color: Colors.teal)),
+                            avatar: CircleAvatar(
+                              backgroundColor: Colors.cyan[200],
+                              child: Text(
+                                'T',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
                             backgroundColor: Colors.blue,
                             label: Text(
                               typeText,
@@ -150,8 +165,24 @@ class PokeDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: pokemon.weaknesses
                         .map((w) => FilterChip(
-                            shape: StadiumBorder(
-                                side: BorderSide(color: Colors.teal)),
+                            elevation: 5,
+                            shadowColor: Colors.red[600],
+                            shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              ),
+                            ),
+                            avatar: CircleAvatar(
+                              backgroundColor: Colors.deepOrange[200],
+                              child: Text(
+                                'W',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red[700],
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
                             backgroundColor: Colors.red[600],
                             label: Text(
                               w,
@@ -189,9 +220,23 @@ class PokeDetail extends StatelessWidget {
                                   ]
                                 : pokemon.prevEvolution
                                     .map((p) => FilterChip(
-                                          shape: StadiumBorder(
-                                              side: BorderSide(
-                                                  color: Colors.teal)),
+                                          elevation: 5,
+                                          shadowColor: Colors.cyan,
+                                          shape: BeveledRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(8),
+                                            ),
+                                          ),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.cyan[800],
+                                            child: Text(
+                                              'P',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ),
                                           backgroundColor: Colors.cyan,
                                           label: Text(
                                             p.name,
@@ -223,9 +268,24 @@ class PokeDetail extends StatelessWidget {
                                 ? [Text("This is the final form")]
                                 : pokemon.nextEvolution
                                     .map((n) => FilterChip(
-                                          shape: StadiumBorder(
-                                              side: BorderSide(
-                                                  color: Colors.teal)),
+                                          elevation: 5,
+                                          shadowColor: Colors.green[600],
+                                          shape: BeveledRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(8),
+                                            ),
+                                          ),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.green[200],
+                                            child: Text(
+                                              'N',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green[800],
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ),
                                           backgroundColor: Colors.green[600],
                                           label: Text(
                                             n.name,

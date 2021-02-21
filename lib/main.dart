@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:pokedex/pokemon.dart';
+import 'package:pokedex/models/pokemon.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pokedex/pokemondetail.dart';
 
@@ -54,35 +54,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: Center(
-          child: Container(
-            child: Padding(
-              padding: EdgeInsets.only(top: 100),
-              child: Column(
-                children: [
-                  Text(
-                    "Hello!!!",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Card(
-                    elevation: 0,
-                    child: Container(
-                      height: 500,
-                      width: 500,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg"))),
-                    ),
-                    // Image.network(
-                  ), //     "https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg"),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+      drawer: Drawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
@@ -105,13 +77,61 @@ class _HomePageState extends State<HomePage> {
             )
           : Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    "List of Pokemon",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
+                Card(
+                  elevation: 0,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CircleAvatar(
+                            radius: 28,
+                            backgroundColor: Color(0xffFDCF09),
+                            child: CircleAvatar(
+                              radius: 26,
+                              backgroundImage: NetworkImage(
+                                  'https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg'),
+                            ),
+                          ),
+                          CircleAvatar(
+                            radius: 33,
+                            backgroundColor: Color(0xffFDCF09),
+                            child: CircleAvatar(
+                              radius: 31,
+                              backgroundImage: NetworkImage(
+                                  'https://i.pinimg.com/originals/e7/0e/d0/e70ed0b54f9230c56c2e3bd2958d68a4.jpg'),
+                            ),
+                          ),
+                          CircleAvatar(
+                            radius: 42,
+                            backgroundColor: Color(0xffFDCF09),
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundImage: NetworkImage(
+                                  'http://cdn.shopify.com/s/files/1/1756/9559/products/pokeball_coaster_photo_1024x1024.jpg?v=1557064798'),
+                            ),
+                          ),
+                          CircleAvatar(
+                            radius: 33,
+                            backgroundColor: Color(0xffFDCF09),
+                            child: CircleAvatar(
+                              radius: 31,
+                              backgroundImage: NetworkImage(
+                                  'https://static.wikia.nocookie.net/totalpokemonisland/images/f/f3/Squirtle.jpg/revision/latest/scale-to-width-down/340?cb=20120805051751'),
+                            ),
+                          ),
+                          CircleAvatar(
+                            radius: 28,
+                            backgroundColor: Color(0xffFDCF09),
+                            child: CircleAvatar(
+                              radius: 26,
+                              backgroundImage: NetworkImage(
+                                  'https://i.pinimg.com/originals/08/36/49/0836496331b2369df9f27a545d5f250a.jpg'),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
