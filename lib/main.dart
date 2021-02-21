@@ -86,46 +86,46 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CircleAvatar(
-                            radius: 28,
+                            radius: 25,
                             backgroundColor: Color(0xffFDCF09),
                             child: CircleAvatar(
-                              radius: 26,
+                              radius: 23,
                               backgroundImage: NetworkImage(
                                   'https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg'),
                             ),
                           ),
                           CircleAvatar(
-                            radius: 33,
+                            radius: 30,
                             backgroundColor: Color(0xffFDCF09),
                             child: CircleAvatar(
-                              radius: 31,
+                              radius: 28,
                               backgroundImage: NetworkImage(
                                   'https://i.pinimg.com/originals/e7/0e/d0/e70ed0b54f9230c56c2e3bd2958d68a4.jpg'),
                             ),
                           ),
                           CircleAvatar(
-                            radius: 42,
+                            radius: 40,
                             backgroundColor: Color(0xffFDCF09),
                             child: CircleAvatar(
-                              radius: 40,
+                              radius: 38,
                               backgroundImage: NetworkImage(
                                   'http://cdn.shopify.com/s/files/1/1756/9559/products/pokeball_coaster_photo_1024x1024.jpg?v=1557064798'),
                             ),
                           ),
                           CircleAvatar(
-                            radius: 33,
+                            radius: 30,
                             backgroundColor: Color(0xffFDCF09),
                             child: CircleAvatar(
-                              radius: 31,
+                              radius: 28,
                               backgroundImage: NetworkImage(
                                   'https://static.wikia.nocookie.net/totalpokemonisland/images/f/f3/Squirtle.jpg/revision/latest/scale-to-width-down/340?cb=20120805051751'),
                             ),
                           ),
                           CircleAvatar(
-                            radius: 28,
+                            radius: 25,
                             backgroundColor: Color(0xffFDCF09),
                             child: CircleAvatar(
-                              radius: 26,
+                              radius: 23,
                               backgroundImage: NetworkImage(
                                   'https://i.pinimg.com/originals/08/36/49/0836496331b2369df9f27a545d5f250a.jpg'),
                             ),
