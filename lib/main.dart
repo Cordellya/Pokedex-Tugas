@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pokedex/pokemondetail.dart';
-
 import 'widget/costum_box.dart';
 
 void main() => runApp(MaterialApp(
@@ -20,11 +19,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var url =
-      // "https://pokeapi.co/api/v2";
-
       "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
 
   PokeList pokeList;
+  PokeList searchPoke;
+  List searchList = [];
+  bool isSearching = false;
 
   @override
   void initState() {
@@ -37,39 +37,101 @@ class _HomePageState extends State<HomePage> {
     var resp = await http.get(url);
     var decodeJson = jsonDecode(resp.body);
     pokeList = PokeList.fromJson(decodeJson);
+    searchPoke = PokeList.fromJson(decodeJson);
     setState(() {});
   }
+
+  void searchPokemon(change) {
+    setState(() {
+      var searchList = pokeList.pokemon
+          .where((p) => p.name.toLowerCase().contains(change.toLowerCase()))
+          .toList();
+
+      searchPoke.pokemon = searchList;
+    });
+  }
+
+  var searchIcon = (Icons.search);
+  var cancelIcon = (Icons.cancel);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pokedex App'),
         backgroundColor: Colors.tealAccent[700],
+        title: !isSearching
+            ? Text('Pokedex App')
+            : TextField(
+                onChanged: (change) {
+                  searchPokemon(change);
+                },
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    icon: Icon(
+                      searchIcon,
+                      color: Colors.white,
+                    ),
+                    hintText: "Search...",
+                    hintStyle: TextStyle(color: Colors.white)),
+              ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
+          isSearching
+              ? IconButton(
+                  icon: Icon(cancelIcon),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearching = false;
+                      searchPoke = pokeList;
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: Icon(searchIcon),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearching = true;
+                    });
+                  },
+                )
         ],
       ),
       drawer: Drawer(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return CustomDialogBox(
-                title: "Pokedex",
-                descriptions: "This App is for educational purpose.",
-                text: "Ok",
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomDialogBox(
+                    title: "Pokedex",
+                    descriptions: "This App is for educational purpose.",
+                    text: "Ok",
+                  );
+                },
               );
             },
-          );
-        },
-        child: Icon(Icons.info),
-        backgroundColor: Colors.tealAccent[700],
+            heroTag: null,
+            child: Icon(Icons.info),
+            backgroundColor: Colors.tealAccent[700],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
+            heroTag: null,
+            child: Icon(Icons.refresh),
+            backgroundColor: Colors.tealAccent[700],
+          ),
+        ],
       ),
       body: pokeList == null
           ? Center(
@@ -77,62 +139,59 @@ class _HomePageState extends State<HomePage> {
             )
           : Column(
               children: [
-                Card(
-                  elevation: 0,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Color(0xffFDCF09),
-                            child: CircleAvatar(
-                              radius: 23,
-                              backgroundImage: NetworkImage(
-                                  'https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Color(0xffFDCF09),
-                            child: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: NetworkImage(
-                                  'https://i.pinimg.com/originals/e7/0e/d0/e70ed0b54f9230c56c2e3bd2958d68a4.jpg'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Color(0xffFDCF09),
-                            child: CircleAvatar(
-                              radius: 38,
-                              backgroundImage: NetworkImage(
-                                  'http://cdn.shopify.com/s/files/1/1756/9559/products/pokeball_coaster_photo_1024x1024.jpg?v=1557064798'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Color(0xffFDCF09),
-                            child: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: NetworkImage(
-                                  'https://static.wikia.nocookie.net/totalpokemonisland/images/f/f3/Squirtle.jpg/revision/latest/scale-to-width-down/340?cb=20120805051751'),
-                            ),
-                          ),
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Color(0xffFDCF09),
-                            child: CircleAvatar(
-                              radius: 23,
-                              backgroundImage: NetworkImage(
-                                  'https://i.pinimg.com/originals/08/36/49/0836496331b2369df9f27a545d5f250a.jpg'),
-                            ),
-                          ),
-                        ],
+                Container(
+                  color: Colors.white,
+                  width: double.infinity,
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Color(0xffFDCF09),
+                        child: CircleAvatar(
+                          radius: 23,
+                          backgroundImage: NetworkImage(
+                              'https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg'),
+                        ),
                       ),
-                    ),
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Color(0xffFDCF09),
+                        child: CircleAvatar(
+                          radius: 28,
+                          backgroundImage: NetworkImage(
+                              'https://i.pinimg.com/originals/e7/0e/d0/e70ed0b54f9230c56c2e3bd2958d68a4.jpg'),
+                        ),
+                      ),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Color(0xffFDCF09),
+                        child: CircleAvatar(
+                          radius: 38,
+                          backgroundImage: NetworkImage(
+                              'http://cdn.shopify.com/s/files/1/1756/9559/products/pokeball_coaster_photo_1024x1024.jpg?v=1557064798'),
+                        ),
+                      ),
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Color(0xffFDCF09),
+                        child: CircleAvatar(
+                          radius: 28,
+                          backgroundImage: NetworkImage(
+                              'https://static.wikia.nocookie.net/totalpokemonisland/images/f/f3/Squirtle.jpg/revision/latest/scale-to-width-down/340?cb=20120805051751'),
+                        ),
+                      ),
+                      CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Color(0xffFDCF09),
+                        child: CircleAvatar(
+                          radius: 23,
+                          backgroundImage: NetworkImage(
+                              'https://i.pinimg.com/originals/08/36/49/0836496331b2369df9f27a545d5f250a.jpg'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -212,4 +271,6 @@ class _HomePageState extends State<HomePage> {
             ),
     );
   }
+
+  void get newMethod => Icons;
 }

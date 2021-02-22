@@ -5,6 +5,7 @@
 ![Home](screenshots/home_page.png "Home")
 ![modal-dialog](screenshots/modal_dialog.png "modal-dialog")
 ![poke-detail](screenshots/poke_detail.png "poke-detail")
+![search](screenshots/search.png "search")
 
 A new Flutter project.
 
