@@ -2,7 +2,7 @@
 
 ## App Preview
 
-![Home](screenshots/home_page.png "Home")
+![home](screenshots/home_page.png "home")
 ![modal-dialog](screenshots/modal_dialog.png "modal-dialog")
 ![poke-detail](screenshots/poke_detail.png "poke-detail")
 ![search](screenshots/search.png "search")
